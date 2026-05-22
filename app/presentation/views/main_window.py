@@ -218,12 +218,39 @@ class MainWindow(QMainWindow):
       color: #1F3A5F;
     """)
 
-    description = QLabel(
-      "AguaBody Desktop é um sistema para controle inteligente de hidratação."
-    )
+    description = QLabel("""
+      <b style="color:#1F3A5F; font-size:18px;">
+      AguaBody Desktop
+      </b><br><br>
+
+      Aplicativo inteligente desenvolvido para auxiliar no controle diário da hidratação, promovendo saúde, bem-estar e qualidade de vida através de uma experiência moderna, intuitiva e eficiente.<br><br>
+
+      O sistema permite acompanhar o consumo diário de água, definir metas personalizadas, receber lembretes automáticos, visualizar estatísticas de consumo e manter uma rotina de hidratação organizada e saudável.<br><br>
+
+      Desenvolvido com foco em desempenho, praticidade e design moderno, utilizando arquitetura profissional MVVM, interface desktop moderna com PySide6 e banco de dados SQLite local.<br><br>
+
+      <b style="color:#1F3A5F;">Recursos principais</b><br>
+      • Controle diário de consumo de água<br>
+      • Metas personalizadas de hidratação<br>
+      • Lembretes automáticos inteligentes<br>
+      • Histórico completo de consumo<br>
+      • Estatísticas e gráficos de desempenho<br>
+      • Funcionamento offline<br>
+      • Interface moderna e intuitiva<br><br>
+      
+      Projeto AguaBody Desktop<br>
+      <br>
+      <b style="color:#1F3A5F;">Desenvolvido por Adriano Medeiros Alves da Silva</b><br>
+      <b style="color:#1F3A5F;">Contato: adrianomedeiros616@gmail.com</b><br>
+      
+      """)
+  
+    description.setWordWrap(True)
+
     description.setStyleSheet("""
-      font-size: 16px;
+      font-size: 15px;
       color: #607D9A;
+      line-height: 1.6;
     """)
 
     version = QLabel("Versão 1.0.0")
@@ -234,6 +261,7 @@ class MainWindow(QMainWindow):
 
     layout.addWidget(title)
     layout.addWidget(description)
+    
     layout.addWidget(version)
     layout.addStretch()
 
