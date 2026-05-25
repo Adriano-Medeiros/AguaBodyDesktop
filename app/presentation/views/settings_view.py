@@ -12,7 +12,8 @@ from PySide6.QtWidgets import (
 
 from app.presentation.viewmodels.reminder_viewmodel import ReminderViewModel
 from app.presentation.viewmodels.settings_viewmodel import SettingsViewModel
-
+from PySide6.QtWidgets import QCheckBox
+from app.infrastructure.services.startup_service import StartupService
 
 class SettingsView(QWidget):
   reminder_config_updated = Signal()
@@ -31,7 +32,9 @@ class SettingsView(QWidget):
     self.quick_button_1_input = QLineEdit()
     self.quick_button_2_input = QLineEdit()
     self.quick_button_3_input = QLineEdit()
-
+    self.startup_checkbox = QCheckBox(
+      "Iniciar automaticamente com o Windows"
+    )
     self._setup_ui()
     self._load_data()
 
@@ -100,6 +103,21 @@ class SettingsView(QWidget):
     save_quick_buttons_button.setFixedHeight(46)
     save_quick_buttons_button.clicked.connect(self._on_save_quick_buttons_clicked)
     save_quick_buttons_button.setStyleSheet(self._primary_button_style())
+
+    self.startup_checkbox.setChecked(
+      StartupService.is_enabled()
+    )
+
+    self.startup_checkbox.setStyleSheet("""
+      font-size: 15px;
+      color: #1F3A5F;
+    """)
+
+    self.startup_checkbox.stateChanged.connect(
+      self._on_startup_changed
+    )
+
+    layout.addWidget(self.startup_checkbox)
 
     reminder_title = self._section_title("Lembretes")
 
@@ -302,3 +320,9 @@ class SettingsView(QWidget):
         background-color: #EAF6FF;
       }
     """
+    
+  def _on_startup_changed(self, state):
+    if self.startup_checkbox.isChecked():
+      StartupService.enable()
+    else:
+      StartupService.disable()
